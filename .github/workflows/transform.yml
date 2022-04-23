@@ -15,9 +15,6 @@ jobs:
       - name: Setup Node.js Env
         uses: actions/setup-node@v2.4.0
 
-      # Give write access to repo
-      - run: sudo chown -R $USER:$USER ${{ github.workspace }}
-
       # Install Dependencies
       - run: npm install
 
@@ -46,6 +43,9 @@ jobs:
           name: "version.json"
           json: format('{{ "version", {0}, {1} }}', ":", ${{ steps.increasedTag.outputs.new_version }})
           dir: "dist/"
+
+      # Give write access to repo
+      - run: sudo chown -R $USER:$USER ${{ github.workspace }}
 
       - name: Commit the changes
         uses: stefanzweifel/git-auto-commit-action@v4

@@ -41,7 +41,7 @@ jobs:
         uses: jsdaniell/create-json@1.1.2
         with:
           name: "version.json"
-          json: format('{{ "version", {0}, {1} }}', ":", ${{ steps.increasedTag.outputs.new_version }})
+          json: '{ "version": "${{ steps.increasedTag.outputs.new_version }}" }'
           dir: "dist/"
 
       # Give write access to repo

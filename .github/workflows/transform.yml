@@ -27,27 +27,25 @@ jobs:
           initial_version: "v1.0.0"
           with_initial_version: true
 
-      # Create version.json
-      # - name: Create version.json
-      #   id: createVersionJson
-      #   uses: jsdaniell/create-json@1.1.2
-      #   with:
-      #     name: "version.json"
-      #     json: ${{ steps.latestTag.outputs.tag }}
-      #     dir: "dist/"
-
-      # Add files that were created.
-      - name: Commit the changes
-        uses: stefanzweifel/git-auto-commit-action@v4
-        with:
-          commit_message: transformed FT to CSS with SD
-
       - name: Create an incremental tag
         uses: actions-ecosystem/action-bump-semver@v1
         id: increasedTag
         with:
           current_version: ${{ steps.latestTag.outputs.tag }}
           level: patch
+
+      - name: Create version.json
+        id: createVersionJson
+        uses: jsdaniell/create-json@1.1.2
+        with:
+          name: "version.json"
+          json: ${{ steps.increasedTag.outputs.new_version }}
+          dir: "dist/"
+
+      - name: Commit the changes
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: transformed FT to CSS with SD
 
       - name: Push new tag
         uses: actions-ecosystem/action-push-tag@v1

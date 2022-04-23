@@ -39,7 +39,7 @@ jobs:
         uses: jsdaniell/create-json@1.1.2
         with:
           name: "version.json"
-          json: ${{ steps.increasedTag.outputs.new_version }}
+          json: ${{ steps.increasedTag.outputs }}
           dir: "dist/"
 
       - name: Commit the changes

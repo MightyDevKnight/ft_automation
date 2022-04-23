@@ -47,6 +47,7 @@ jobs:
         id: increasedTag
         with:
           current_version: ${{ steps.latestTag.outputs.tag }}
+          level: patch
 
       - name: Push new tag
         uses: actions-ecosystem/action-push-tag@v1

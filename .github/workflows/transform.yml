@@ -37,12 +37,18 @@ jobs:
       #     dir: "dist/"
 
       # Add files that were created.
-      - uses: stefanzweifel/git-auto-commit-action@v4
+      - name: Commit the changes
+        uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: transformed FT to CSS with SD
 
-      - name: Create an incremental release
+      - name: Create an incremental tag
         uses: actions-ecosystem/action-bump-semver@v1
-        id: increaseTag
+        id: increasedTag
         with:
           current_version: ${{ steps.latestTag.outputs.tag }}
+
+      - name: Push new tag
+        uses: actions-ecosystem/action-push-tag@v1
+        with:
+          tag: ${{ steps.increasedTag.outputs.new_version }}

@@ -15,6 +15,9 @@ jobs:
       - name: Setup Node.js Env
         uses: actions/setup-node@v2.4.0
 
+      # Give write access to repo
+      - run: sudo chown -R $USER:$USER ${{ github.workspace }}
+
       # Install Dependencies
       - run: npm install
 

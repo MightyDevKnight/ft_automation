@@ -41,12 +41,8 @@ jobs:
         with:
           commit_message: transformed FT to CSS with SD
 
-      - uses: actions-ecosystem/action-release-label@v1
-        id: releaseLabel
-
       - name: Create an incremental release
         uses: actions-ecosystem/action-bump-semver@v1
         id: increaseTag
         with:
           current_version: ${{ steps.latestTag.outputs.tag }}
-          level: ${{ steps.releaseLabel.outputs.level }}
